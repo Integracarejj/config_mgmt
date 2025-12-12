@@ -1,0 +1,773 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../SurveyFeedReports/">
+      
+      
+        <link rel="next" href="../RoleCatSuper/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>SurveyFeedDB - TalentLMS ETL Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#executive-overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="TalentLMS ETL Documentation" class="md-header__button md-logo" aria-label="TalentLMS ETL Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TalentLMS ETL Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SurveyFeedDB
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="TalentLMS ETL Documentation" class="md-nav__button md-logo" aria-label="TalentLMS ETL Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TalentLMS ETL Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CommLicense/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CommLicense
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SurveyFeedGen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SurveyFeedGen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SurveyFeedReports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SurveyFeedReports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SurveyFeedDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RoleCatSuper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RoleCatSuper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DimUser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DimUser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DimEnrollment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DimEnrollment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DimCourse_FactCourse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DimCourse_FactCourse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CourseRoleDaysHelper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CourseRoleDaysHelper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="executive-overview">Executive Overview</h1>
+<h1 id="purpose">Purpose</h1>
+<p>This Azure Function performs an <strong>ETL (Extract, Transform, Load)</strong> process that moves survey feedback data from a <strong>SharePoint list</strong> into an <strong>Azure SQL database</strong>, ensuring data consistency, audit tracking, and snapshotting for trend analysis.</p>
+<h1 id="reads-config">Reads Config</h1>
+<ul>
+<li>Loads <code>config.json</code> for Microsoft Graph credentials and SharePoint site/list details.</li>
+<li>Reads Azure SQL connection details from <strong>environment variables</strong> (<code>DB_Server</code>, <code>DB_Name</code>, <code>DB_User</code>, <code>DB_Pass</code>).</li>
+</ul>
+<h1 id="authenticates-with-microsoft-graph">Authenticates with Microsoft Graph</h1>
+<ul>
+<li>Uses <strong>client credentials flow</strong> to obtain an OAuth token.</li>
+<li>Required for accessing SharePoint list items via Graph API.</li>
+</ul>
+<h1 id="fetches-sharepoint-data">Fetches SharePoint Data</h1>
+<ul>
+<li>Retrieves all items from the specified SharePoint list using <strong>Graph API</strong>.</li>
+<li>Handles pagination with <code>@odata.nextLink</code>.</li>
+<li>Extracts relevant fields such as <code>CompoundKey</code>, <code>ActionTaken</code>, <code>Answer</code>, <code>Developer</code>, <code>CourseName</code>, etc.</li>
+</ul>
+<h1 id="connects-to-azure-sql">Connects to Azure SQL</h1>
+<ul>
+<li>Establishes a connection using <strong>pymssql</strong>.</li>
+<li>Targets tables:</li>
+<li><code>dbo.DimSurveyFeed</code> (main dimension table)</li>
+<li><code>dbo.FactSurveyStatusChange</code> (audit table for status changes)</li>
+<li><code>dbo.FactSurveyStatusSnapshot</code> (daily snapshot for trend analysis)</li>
+</ul>
+<h1 id="processes-each-item">Processes Each Item</h1>
+<ul>
+<li>Checks if <code>CompoundKey</code> exists in <code>DimSurveyFeed</code>:</li>
+<li>If exists → Updates record if status, answer, or notes changed.</li>
+<li>Logs status changes in <code>FactSurveyStatusChange</code>.</li>
+<li>If new → Inserts into <code>DimSurveyFeed</code>.</li>
+<li>Inserts a snapshot into <code>FactSurveyStatusSnapshot</code> if not already present for today.</li>
+</ul>
+<h1 id="commits-changes">Commits Changes</h1>
+<ul>
+<li>Commits all inserts/updates.</li>
+<li>Logs counts for inserted, updated, audit entries, and snapshots.</li>
+<li>Closes SQL connection gracefully.</li>
+</ul>
+<h1 id="key-outcomes">Key Outcomes</h1>
+<ul>
+<li>Synchronizes SharePoint survey feedback with Azure SQL.</li>
+<li>Maintains historical audit trail of status changes.</li>
+<li>Enables trend reporting via daily snapshots.</li>
+</ul>
+<hr />
+<h1 id="function-name">Function Name</h1>
+<p><strong>Identifier:</strong> <code>SurveyFeedDB</code></p>
+<h2 id="1-summary-descriptor">1. Summary / Descriptor</h2>
+<p>This function extracts survey feedback items from a SharePoint list and loads them into Azure SQL tables for reporting and analytics. It ensures deduplication, updates changed records, logs status changes, and creates daily snapshots for trend analysis.</p>
+<hr />
+<h2 id="2-inputs">2. Inputs</h2>
+<h3 id="a-data-sources">A. Data Sources</h3>
+<ul>
+<li><strong>HTTP/API Calls:</strong></li>
+<li>Microsoft Graph:<ul>
+<li><code>POST https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token</code> (OAuth token)</li>
+<li><code>GET https://graph.microsoft.com/v1.0/sites/integracare.sharepoint.com:/sites/{SITE_NAME}:/lists/{LIST_NAME}/items?expand=fields&amp;$top=100</code> (fetch list items)</li>
+</ul>
+</li>
+<li>Headers/Auth:<ul>
+<li>OAuth Bearer token for Graph</li>
+</ul>
+</li>
+<li>Pagination:<ul>
+<li>Handles <code>@odata.nextLink</code> for large lists</li>
+</ul>
+</li>
+<li>
+<p>Payload format:</p>
+<ul>
+<li>JSON responses from Graph API</li>
+</ul>
+</li>
+<li>
+<p><strong>Files / Blobs / SharePoint / Others:</strong></p>
+</li>
+<li>Config file: <code>config.json</code></li>
+<li>SharePoint List: <code>{LIST_NAME}</code> in site <code>{SITE_NAME}</code></li>
+</ul>
+<h3 id="b-configuration">B. Configuration</h3>
+<ul>
+<li><strong>Uses config.json:</strong> Yes</li>
+<li><strong>Uses emails.json:</strong> No</li>
+<li><strong>Uses Azure env vars:</strong> Yes</li>
+<li><code>DB_Server</code>, <code>DB_Name</code>, <code>DB_User</code>, <code>DB_Pass</code></li>
+</ul>
+<hr />
+<h2 id="3-outputs">3. Outputs</h2>
+<h3 id="a-database-updates">A. Database Updates</h3>
+<ul>
+<li><strong>Tables Written To:</strong></li>
+<li><code>dbo.DimSurveyFeed</code> → Inserts new survey feedback or updates existing records.</li>
+<li><code>dbo.FactSurveyStatusChange</code> → Logs old vs. new status when changed.</li>
+<li><code>dbo.FactSurveyStatusSnapshot</code> → Inserts daily snapshot for trend analysis.</li>
+<li><strong>Operations detected:</strong> INSERT, UPDATE</li>
+<li><strong>Columns updated:</strong></li>
+<li>Developer, CourseCode, CourseName, Category, SurveyID, CourseID, UserID, Status, CourseCreator, User, Question, Answer, Notes, timestamps, audit fields.</li>
+</ul>
+<h3 id="b-sharepoint-output">B. SharePoint Output</h3>
+<ul>
+<li>None (Read-only from SharePoint list)</li>
+</ul>
+<h3 id="c-other-outputs">C. Other Outputs</h3>
+<ul>
+<li>None (No emails, CSV, or PowerBI refresh)</li>
+</ul>
+<hr />
+<h2 id="4-runtime-behavior">4. Runtime Behavior</h2>
+<ul>
+<li>Imports: <code>logging</code>, <code>azure.functions</code>, <code>requests</code>, <code>json</code>, <code>os</code>, <code>datetime.date</code>, <code>pymssql</code></li>
+<li>Frequency (schedule/cron): Defined in <code>function.json</code> (Timer trigger)</li>
+<li>Trigger Type: Timer</li>
+</ul>
+<hr />
+<h2 id="5-hosting-deployment">5. Hosting / Deployment</h2>
+<ul>
+<li>Hosting Platform: Azure Functions</li>
+<li>Function App Name: (Configured in Azure)</li>
+<li>Resource Group: (Configured in Azure)</li>
+<li>Python Version: 3.x</li>
+<li>Source Code Repository / Path: <code>C:\Users\JeremyJoyner\AzureFunctions\TalentLMS\SurveyFeedDB</code></li>
+</ul>
+<hr />
+<h2 id="6-triggers">6. Triggers</h2>
+<ul>
+<li>Trigger: Auto</li>
+<li>If automatic:</li>
+<li>Cron/Schedule expression: (From <code>function.json</code>)</li>
+</ul>
+<hr />
+<h2 id="7-gotchas-caveats">7. Gotchas / Caveats</h2>
+<ul>
+<li>Requires valid Microsoft Graph credentials in <code>config.json</code>.</li>
+<li>Requires Azure SQL credentials in environment variables.</li>
+<li>Large SharePoint lists may require pagination handling.</li>
+<li>Updates only occur if status, answer, or notes differ from existing record.</li>
+</ul>
+<hr />
+<h2 id="8-notes-8-notes-freeform">8. Notes## 8. Notes / Freeform</h2>
+<ul>
+<li>Ideal for building a historical data warehouse for survey feedback.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

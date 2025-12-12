@@ -1,0 +1,21 @@
+site_name: TalentLMS ETL Documentation
+nav:
+  - Home: index.md
+  - Scripts:
+      - CommLicense: CommLicense.md
+      - SurveyFeedGen: SurveyFeedGen.md
+      - SurveyFeedReports: SurveyFeedReports.md
+      - SurveyFeedDB: SurveyFeedDB.md
+      - RoleCatSuper: RoleCatSuper.md
+      - DimUser: DimUser.md
+      - FactEnrollment: FactEnrollment.md
+      - DimCourse_FactCourse: DimCourse_FactCourse.md
+      - CourseRoleDaysHelper: CourseRoleDaysHelper.md
+theme:
+  name: material
+plugins:
+  - search
+markdown_extensions:
+  - admonition
+  - codehil  - codehilite
+  - toc:
