@@ -1,0 +1,774 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../DimEnrollment/">
+      
+      
+        <link rel="next" href="../CourseRoleDaysHelper/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>DimCourse_FactCourse - TalentLMS ETL Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#executive-overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="TalentLMS ETL Documentation" class="md-header__button md-logo" aria-label="TalentLMS ETL Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TalentLMS ETL Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DimCourse_FactCourse
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="TalentLMS ETL Documentation" class="md-nav__button md-logo" aria-label="TalentLMS ETL Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TalentLMS ETL Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CommLicense/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CommLicense
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SurveyFeedGen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SurveyFeedGen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SurveyFeedReports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SurveyFeedReports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SurveyFeedDB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SurveyFeedDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RoleCatSuper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RoleCatSuper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DimUser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DimUser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DimEnrollment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DimEnrollment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DimCourse_FactCourse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CourseRoleDaysHelper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CourseRoleDaysHelper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="executive-overview">Executive Overview</h1>
+<h1 id="purpose">Purpose</h1>
+<p>This Azure Function performs a <strong>DimCourse and FactCourseDevelopment ETL</strong>. It retrieves course metadata from <strong>TalentLMS</strong>, updates or inserts records into <code>dbo.DimCourse</code>, and synchronizes <code>dbo.FactCourseDevelopment</code> for reporting and analytics. It ensures all course attributes—including custom fields—are normalized and stored for downstream dashboards.</p>
+<h1 id="reads-config">Reads Config</h1>
+<ul>
+<li>Loads <code>config.json</code> for:</li>
+<li><strong>TalentLMS</strong>: <code>BASE_URL</code>, <code>API_KEY</code>, <code>API_PASSWORD</code></li>
+<li><strong>AzureSQL</strong>: <code>SERVER</code>, <code>DB</code>, <code>USER</code>, <code>PASSWORD</code></li>
+</ul>
+<h1 id="authenticates-data-sources">Authenticates / Data Sources</h1>
+<ul>
+<li><strong>TalentLMS API</strong>: <code>GET {BASE_URL}/courses/</code> using Basic Auth</li>
+<li><strong>Azure SQL (pymssql)</strong>: Reads/writes across <code>dbo.DimCourse</code> and <code>dbo.FactCourseDevelopment</code></li>
+</ul>
+<h1 id="fetches-processes-data">Fetches &amp; Processes Data</h1>
+<ul>
+<li>Pulls all courses from TalentLMS, including:</li>
+<li>Core fields: <code>CourseID</code>, <code>Code</code>, <code>Name</code>, <code>CategoryID</code>, <code>Description</code>, <code>Status</code>, <code>Developer</code></li>
+<li>Custom fields: <code>EOO</code>, <code>CRD</code>, <code>RWD</code>, <code>ASD</code>, <code>DED</code>, <code>LStaD</code>, <code>LStoD</code>, <code>SME</code>, <code>HEA</code>, <code>AGM</code>, <code>Other</code>, <code>CategoryName</code>, <code>DueDate</code></li>
+<li>Parses <code>DueDate</code> from <code>custom_field_13</code> (format: <code>MM/DD/YYYY</code>)</li>
+<li>Updates existing courses in <code>DimCourse</code> or inserts new ones</li>
+<li>Maintains timestamps: <code>CreationDate</code>, <code>LastUpdate</code></li>
+</ul>
+<h1 id="sql-modeling-fact-sync">SQL Modeling &amp; Fact Sync</h1>
+<ul>
+<li>After DimCourse updates:</li>
+<li>Inserts new rows into <code>FactCourseDevelopment</code> for courses not yet present</li>
+<li>Updates existing Fact rows to reflect latest DimCourse attributes</li>
+<li>Ensures Fact table mirrors DimCourse for reporting consistency</li>
+</ul>
+<h1 id="commits-logging">Commits &amp; Logging</h1>
+<ul>
+<li>Logs progress every 20 courses processed</li>
+<li>Commits after DimCourse and FactCourseDevelopment sync</li>
+<li>Closes DB connection gracefully</li>
+</ul>
+<h1 id="key-outcomes">Key Outcomes</h1>
+<ul>
+<li>Keeps DimCourse and FactCourseDevelopment aligned with TalentLMS</li>
+<li>Captures all course metadata and custom fields for analytics</li>
+<li>Provides a foundation for dashboards and performance tracking</li>
+</ul>
+<hr />
+<h1 id="function-name">Function Name</h1>
+<p><strong>Identifier:</strong> <code>DimCourse_FactCourse</code></p>
+<h2 id="1-summary-descriptor">1. Summary / Descriptor</h2>
+<p>This function ingests TalentLMS course data, updates <code>dbo.DimCourse</code> with normalized attributes, and synchronizes <code>dbo.FactCourseDevelopment</code> for reporting. It handles inserts, updates, and ensures custom fields and due dates are properly stored.</p>
+<hr />
+<h2 id="2-inputs">2. Inputs</h2>
+<h3 id="a-data-sources">A. Data Sources</h3>
+<ul>
+<li><strong>HTTP/API Calls (TalentLMS):</strong></li>
+<li><code>GET {BASE_URL}/courses/</code></li>
+<li>Auth: Basic (<code>API_KEY</code>, <code>API_PASSWORD</code>)</li>
+<li>
+<p>Payload: JSON</p>
+</li>
+<li>
+<p><strong>Database (Azure SQL via pymssql):</strong></p>
+</li>
+<li><strong>Reads from</strong>:<ul>
+<li><code>dbo.DimCourse</code> (existence check by <code>CourseID</code>)</li>
+<li><code>dbo.FactCourseDevelopment</code> (existence check for Fact sync)</li>
+</ul>
+</li>
+<li><strong>Writes to</strong>:<ul>
+<li><code>dbo.DimCourse</code> (INSERT/UPDATE)</li>
+<li><code>dbo.FactCourseDevelopment</code> (INSERT new rows, UPDATE existing rows)</li>
+</ul>
+</li>
+</ul>
+<h3 id="b-configuration">B. Configuration</h3>
+<ul>
+<li><strong>Uses config.json:</strong> Yes</li>
+<li><strong>Uses emails.json:</strong> No</li>
+<li><strong>Uses Azure env vars:</strong> No (DB credentials come from <code>config.json</code>)</li>
+<li><strong>Key config keys:</strong></li>
+<li><code>TalentLMS.BASE_URL</code>, <code>TalentLMS.API_KEY</code>, <code>TalentLMS.API_PASSWORD</code></li>
+<li><code>AzureSQL.SERVER</code>, <code>AzureSQL.DB</code>, <code>AzureSQL.USER</code>, <code>AzureSQL.PASSWORD</code></li>
+</ul>
+<hr />
+<h2 id="3-outputs">3. Outputs</h2>
+<h3 id="a-database-updates">A. Database Updates</h3>
+<ul>
+<li><strong>Tables Written To &amp; Operations</strong></li>
+<li><code>dbo.DimCourse</code> → <strong>INSERT/UPDATE</strong><ul>
+<li>Columns: <code>CourseID, Code, Name, CategoryID, Description, Status, Developer, EOO, CRD, RWD, ASD, DED, LStaD, LStoD, SME, HEA, AGM, Other, CategoryName, DueDate, CreationDate, LastUpdate</code></li>
+</ul>
+</li>
+<li><code>dbo.FactCourseDevelopment</code> → <strong>INSERT/UPDATE</strong><ul>
+<li>Mirrors DimCourse attributes for reporting</li>
+</ul>
+</li>
+</ul>
+<h3 id="b-sharepoint-output">B. SharePoint Output</h3>
+<ul>
+<li>None</li>
+</ul>
+<h3 id="c-other-outputs">C. Other Outputs</h3>
+<ul>
+<li>Logging: progress every 20 courses, warnings on date parsing, completion summary</li>
+</ul>
+<hr />
+<h2 id="4-runtime-behavior">4. Runtime Behavior</h2>
+<ul>
+<li><strong>Imports</strong>: <code>logging</code>, <code>json</code>, <code>requests</code>, <code>pymssql</code>, <code>Path</code>, <code>datetime</code>, <code>time</code>, <code>azure.functions</code></li>
+<li><strong>Trigger Type</strong>: Timer (defined in <code>function.json</code>)</li>
+<li><strong>Frequency (schedule/cron)</strong>: (from <code>function.json</code>)</li>
+<li><strong>Processing Flow</strong>:</li>
+<li>Load config; connect to Azure SQL</li>
+<li>Fetch TalentLMS courses</li>
+<li>Upsert DimCourse records</li>
+<li>Sync FactCourseDevelopment (insert new, update existing)</li>
+<li>Commit and close</li>
+</ul>
+<hr />
+<h2 id="5-hosting-deployment">5. Hosting / Deployment</h2>
+<ul>
+<li>Hosting Platform: Azure Functions</li>
+<li>Function App Name: (configured in Azure)</li>
+<li>Resource Group: (configured in Azure)</li>
+<li>Python Version: 3.x</li>
+<li>Source Code Repository / Path: <code>C:\Users\JeremyJoyner\AzureFunctions\TalentLMS\DimCourse_FactCourse</code></li>
+</ul>
+<hr />
+<h2 id="6-triggers">6. Triggers</h2>
+<ul>
+<li>Trigger: Auto (Timer)</li>
+<li>If automatic:</li>
+<li>Cron/Schedule expression: (From <code>function.json</code>)</li>
+</ul>
+<hr />
+<h2 id="7-gotchas-caveats">7. Gotchas / Caveats</h2>
+<ul>
+<li><strong>DueDate parsing</strong>: Expects <code>MM/DD/YYYY</code>; invalid formats logged as warnings and skipped.</li>
+<li><strong>Custom fields</strong>: Hard-coded mapping; changes in TLMS custom field definitions require code updates.</li>
+<li><strong>Fact sync logic</strong>: Inserts only if CourseID not in Fact; updates all attributes otherwise.</li>
+<li><strong>No pagination</strong>: If TLMS courses exceed API default page size, consider adding paging logic.</li>
+</ul>
+<hr />
+<h2 id="8-notes-freeform">8. Notes / Freeform</h2>
+<ul>
+<li>Consider adding an <strong>audit log</strong> (ETL_AuditLog) for counts inserted/updated.</li>
+<li>If Fact table grows large, optimize UPDATE with indexed joins or batch processing.</li>
+<li>Extend logic to handle</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
