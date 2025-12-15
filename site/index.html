@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#scheduled-jobs-overview" class="md-skip">
+        <a href="#details-for-each-script" class="md-skip">
           Skip to content
         </a>
       
@@ -200,8 +200,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -244,25 +242,12 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#job-summary-table" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📋 Job Summary Table
-      
-    </span>
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#details-for-each-script" class="md-nav__link">
@@ -375,6 +360,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#10-commlicensedb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. CommLicenseDB
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -461,6 +457,34 @@
     
   
     CommLicense
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="CommLicenseDB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CommLicenseDB
   
 
     
@@ -722,25 +746,12 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#job-summary-table" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📋 Job Summary Table
-      
-    </span>
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#details-for-each-script" class="md-nav__link">
@@ -853,6 +864,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#10-commlicensedb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. CommLicenseDB
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -886,10 +908,8 @@
 
 
 
-<h1 id="scheduled-jobs-overview">Scheduled Jobs Overview</h1>
-<p>This page lists all automated scripts, their execution schedule, and purpose.</p>
-<hr />
-<h2 id="job-summary-table">📋 Job Summary Table</h2>
+  <h1>Home</h1>
+
 <table>
 <thead>
 <tr>
@@ -903,66 +923,73 @@
 <tbody>
 <tr>
 <td>1</td>
-<td><strong>CommLicense</strong></td>
-<td><code>0 0 18,23 * * *</code></td>
+<td>CommLicense</td>
+<td>0 0 18,23 * * *</td>
 <td>Daily</td>
 <td>Updates SharePoint license items with DaysTillExpire and Status via Graph API.</td>
 </tr>
 <tr>
 <td>2</td>
-<td><strong>SurveyFeedGen</strong></td>
-<td><code>0 0 4 * * 6</code></td>
+<td>SurveyFeedGen</td>
+<td>0 0 4 * * 6</td>
 <td>Weekly</td>
 <td>Pulls survey responses from TalentLMS; posts to SharePoint list; deduplicates and filters meaningless answers.</td>
 </tr>
 <tr>
 <td>3</td>
-<td><strong>SurveyFeedReports</strong></td>
-<td><code>0 0 7 * * 6</code></td>
+<td>SurveyFeedReports</td>
+<td>0 0 7 * * 6</td>
 <td>Weekly</td>
 <td>Sends email notifications for survey feedback marked “Awaiting Review”; includes HTML tables and SharePoint link.</td>
 </tr>
 <tr>
 <td>4</td>
-<td><strong>SurveyFeedDB</strong></td>
-<td><code>0 30 7 * * 6</code></td>
+<td>SurveyFeedDB</td>
+<td>0 30 7 * * 6</td>
 <td>Weekly</td>
 <td>ETL from SharePoint survey list to Azure SQL; updates DimSurveyFeed; logs status changes; snapshots for trend analysis.</td>
 </tr>
 <tr>
 <td>5</td>
-<td><strong>RoleCatSuper</strong></td>
-<td><code>0 0 16 * * 6</code></td>
+<td>RoleCatSuper</td>
+<td>0 0 16 * * 6</td>
 <td>Weekly</td>
 <td>ETL for TalentLMS categories and roles; refreshes HR staging; normalizes names; updates DimSupervisor and DimUser supervisor relationships.</td>
 </tr>
 <tr>
 <td>6</td>
-<td><strong>DimUser</strong></td>
-<td><code>0 30 16 * * 6</code></td>
+<td>DimUser</td>
+<td>0 30 16 * * 6</td>
 <td>Weekly</td>
 <td>Ingests TalentLMS users; enriches with HR data; upserts into DimUser; applies manual overrides.</td>
 </tr>
 <tr>
 <td>7</td>
-<td><strong>FactEnrollment1</strong></td>
-<td><code>0 17 * * 6</code></td>
+<td>FactEnrollment1</td>
+<td>0 17 * * 6</td>
 <td>Weekly</td>
 <td>Pulls course enrollment data for each user from TalentLMS; populates SQL database.</td>
 </tr>
 <tr>
 <td>8</td>
-<td><strong>DimCourse_FactCourse2</strong></td>
-<td><code>30 17 * * 6</code></td>
+<td>DimCourse_FactCourse2</td>
+<td>30 17 * * 6</td>
 <td>Weekly</td>
 <td>Ingests TalentLMS courses; updates DimCourse; syncs FactCourseDevelopment for reporting.</td>
 </tr>
 <tr>
 <td>9</td>
-<td><strong>CourseRoleDaysHelper</strong></td>
-<td><code>0 0 18 * * 6</code></td>
+<td>CourseRoleDaysHelper</td>
+<td>0 18 * * 6</td>
 <td>Weekly</td>
 <td>Builds CourseRoleDays mapping table dynamically from DimCourse and DimRole.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>CommLicenseDB</td>
+<td>0 0 19 * * *</td>
+<td>Daily</td>
+<td>ETL from SharePoint license list to Azure SQL; updates DimCommLicense; includes retry</td>
 </tr>
 </tbody>
 </table>
@@ -1012,6 +1039,11 @@
 <ul>
 <li><strong>Runs:</strong> Weekly on Saturday at 18:00</li>
 <li><strong>Purpose:</strong> Builds CourseRoleDays mapping table dynamically from DimCourse and DimRole.</li>
+</ul>
+<h3 id="10-commlicensedb">10. CommLicenseDB</h3>
+<ul>
+<li><strong>Runs:</strong> Weekly on Sunday at 21:00</li>
+<li><strong>Purpose:</strong> Reviews the Comm License Sharepoint List for updates, upserts any net new updates into Azure database table.</li>
 </ul>
 <hr />
 <h2 id="notes">✅ Notes</h2>

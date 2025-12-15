@@ -3,6 +3,7 @@ nav:
   - Home: index.md
   - Scripts:
       - CommLicense: CommLicense.md
+      - CommLicenseDB: CommLicenseDB.md
       - SurveyFeedGen: SurveyFeedGen.md
       - SurveyFeedReports: SurveyFeedReports.md
       - SurveyFeedDB: SurveyFeedDB.md

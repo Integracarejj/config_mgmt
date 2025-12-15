@@ -1,0 +1,976 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../CommLicense/">
+      
+      
+        <link rel="next" href="../SurveyFeedGen/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>CommLicenseDB - TalentLMS ETL Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#commlicense-azure-function" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="TalentLMS ETL Documentation" class="md-header__button md-logo" aria-label="TalentLMS ETL Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TalentLMS ETL Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CommLicenseDB
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="TalentLMS ETL Documentation" class="md-nav__button md-logo" aria-label="TalentLMS ETL Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TalentLMS ETL Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CommLicense/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CommLicense
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CommLicenseDB
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CommLicenseDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#full-python-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Full Python Script
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SurveyFeedGen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SurveyFeedGen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SurveyFeedReports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SurveyFeedReports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SurveyFeedDB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SurveyFeedDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RoleCatSuper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RoleCatSuper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DimUser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DimUser
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DimEnrollment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DimEnrollment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DimCourse_FactCourse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DimCourse_FactCourse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CourseRoleDaysHelper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CourseRoleDaysHelper
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#full-python-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Full Python Script
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="commlicense-azure-function">CommLicense Azure Function</h1>
+<p>This function:
+- Fetches items from a SharePoint list via Microsoft Graph.
+- Upserts data into an Azure SQL Database.
+- Includes retry logic for transient SQL errors (e.g., 40613).</p>
+<hr />
+<h2 id="full-python-script">Full Python Script</h2>
+<p>```python
+import logging
+import json
+import requests
+import pymssql
+from datetime import datetime
+import os
+import azure.functions as func</p>
+<h1 id="new-imports-for-retryjitter">NEW imports for retry/jitter</h1>
+<p>import time
+import random</p>
+<h1 id="-">------------------------------</h1>
+<h1 id="hardcoded-sharepoint-sitelist-info">Hardcoded SharePoint site/list info</h1>
+<h1 id="-_1">------------------------------</h1>
+<p>SITE_ID = "integracare.sharepoint.com,b211e7da-ecb7-4ce4-8752-1174c21313e7,cd65ec56-38dd-40e2-b08a-a77716603c9f"
+LIST_ID = "ee823721-1b2e-44df-880c-0337b8588b7c"</p>
+<h1 id="-_2">------------------------------</h1>
+<h1 id="load-secrets-from-environment-variables-defensive">Load secrets from environment variables (defensive)</h1>
+<h1 id="-_3">------------------------------</h1>
+<p>def _get_env_required(name: str) -&gt; str:
+    val = os.getenv(name)
+    if not val:
+        raise RuntimeError(f"Required app setting '{name}' is missing. "
+                           f"Check Function App &gt; Configuration (Linux is case-sensitive).")
+    return val</p>
+<h1 id="use-the-exact-casing-as-in-your-function-app-settings">Use the exact casing as in your Function App settings</h1>
+<p>CLIENT_ID = os.getenv("AppRegClientID")
+TENANT_ID = os.getenv("AppRegTenantID")
+CLIENT_SECRET = os.getenv("AppRegSecretValue")</p>
+<p>SQL_SERVER = _get_env_required("DB_Server")
+SQL_DATABASE = _get_env_required("DB_Name")
+SQL_USER = _get_env_required("DB_User")
+SQL_PASSWORD = _get_env_required("DB_Pass")</p>
+<h1 id="-_4">------------------------------</h1>
+<h1 id="helpers">Helpers</h1>
+<h1 id="-_5">------------------------------</h1>
+<p>def safe_value(val, field_type="str"):
+    if val is None:
+        return None
+    if field_type == "int":
+        try:
+            return int(val)
+        except:
+            return None
+    if field_type == "float":
+        try:
+            return float(val)
+        except:
+            return None
+    if isinstance(val, dict) or isinstance(val, list):
+        return json.dumps(val)
+    if isinstance(val, bool):
+        return int(val)
+    if isinstance(val, str):
+        return val.strip()
+    return val</p>
+<p>def parse_datetime(val):
+    if not val:
+        return None
+    try:
+        return datetime.fromisoformat(val.replace("Z", ""))
+    except:
+        return None</p>
+<h1 id="-_6">------------------------------</h1>
+<h1 id="get-microsoft-graph-token">Get Microsoft Graph token</h1>
+<h1 id="-_7">------------------------------</h1>
+<p>def get_access_token():
+    url = f"https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token"
+    payload = {
+        "client_id": CLIENT_ID,
+        "scope": "https://graph.microsoft.com/.default",
+        "client_secret": CLIENT_SECRET,
+        "grant_type": "client_credentials"
+    }
+    r = requests.post(url, data=payload)
+    r.raise_for_status()
+    logging.info("Obtained Microsoft Graph access token")
+    return r.json()["access_token"]</p>
+<h1 id="-_8">------------------------------</h1>
+<h1 id="fetch-all-sharepoint-list-items">Fetch all SharePoint list items</h1>
+<h1 id="-_9">------------------------------</h1>
+<p>def get_list_items(access_token):
+    items = []
+    url = f"https://graph.microsoft.com/v1.0/sites/{SITE_ID}/lists/{LIST_ID}/items?expand=fields&amp;$top=999"
+    headers = {"Authorization": f"Bearer {access_token}"}</p>
+<div class="codehilite"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="nl">url</span><span class="p">:</span>
+<span class="w">    </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">requests</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="w">    </span><span class="n">r</span><span class="p">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<span class="w">    </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+<span class="w">    </span><span class="n">items</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="k">data</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;value&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">[]</span><span class="p">))</span>
+<span class="w">    </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">data</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;@odata.nextLink&quot;</span><span class="p">)</span>
+
+<span class="n">logging</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;Fetched {len(items)} items from SharePoint list&quot;</span><span class="p">)</span>
+<span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">i[&quot;fields&quot;</span><span class="o">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">items</span><span class="err">]</span>
+</code></pre></div>
+
+<h1 id="-_10">------------------------------</h1>
+<h1 id="resilient-azure-sql-connection-with-exponential-backoff">Resilient Azure SQL connection with exponential backoff</h1>
+<h1 id="-_11">------------------------------</h1>
+<p>TRANSIENT_SQL_ERROR_CODES = {40613, 40197, 40501, 10928, 10929, 11001}</p>
+<p>def _extract_sql_error_code(exc: Exception):
+    try:
+        if exc.args and isinstance(exc.args[0], int):
+            return exc.args[0]
+    except Exception:
+        pass
+    return None</p>
+<p>def connect_sql_with_retry(
+    server: str,
+    user: str,
+    password: str,
+    database: str,
+    max_attempts: int = 6,
+    base_delay_seconds: float = 2.0
+):
+    for attempt in range(1, max_attempts + 1):
+        try:
+            conn = pymssql.connect(
+                server=server,
+                user=user,
+                password=password,
+                database=database,
+                charset="UTF-8",
+                login_timeout=15,
+                timeout=30
+            )
+            logging.info("SQL connection established.")
+            return conn
+        except Exception as e:
+            code = _extract_sql_error_code(e)
+            should_retry = (code in TRANSIENT_SQL_ERROR_CODES) or isinstance(e, pymssql.OperationalError)
+            delay = base_delay_seconds * (2 ** (attempt - 1)) + random.uniform(0, 0.5)</p>
+<div class="codehilite"><pre><span></span><code>        if attempt &lt; max_attempts and should_retry:
+            logging.warning(f&quot;Transient SQL connect error (attempt {attempt}/{max_attempts}, code={code}). Retrying in {delay:.1f}s. Error: {e}&quot;)
+            time.sleep(delay)
+            continue
+
+        logging.error(f&quot;SQL connect failed (final attempt {attempt}, code={code}): {e}&quot;, exc_info=True)
+        raise
+</code></pre></div>
+
+<h1 id="-_12">------------------------------</h1>
+<h1 id="fully-optimized-upsert">Fully optimized upsert</h1>
+<h1 id="-_13">------------------------------</h1>
+<p>def upsert_items(items):
+    conn = connect_sql_with_retry(
+        server=SQL_SERVER,
+        user=SQL_USER,
+        password=SQL_PASSWORD,
+        database=SQL_DATABASE
+    )
+    cursor = conn.cursor(as_dict=True)</p>
+<div class="codehilite"><pre><span></span><code><span class="nc">cursor</span><span class="p">.</span><span class="k">execute</span><span class="p">(</span><span class="ss">&quot;SELECT * FROM dbo.DimCommLicense&quot;</span><span class="p">)</span>
+<span class="n">existing_rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="k">row</span><span class="o">[</span><span class="n">&quot;id&quot;</span><span class="o">]</span><span class="err">:</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">cursor</span><span class="p">.</span><span class="n">fetchall</span><span class="p">()</span><span class="err">}</span>
+
+<span class="n">inserts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">updates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="k">for</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">items</span><span class="p">:</span>
+<span class="w">    </span><span class="k">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span>
+<span class="w">        </span><span class="ss">&quot;id&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;id&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;int&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="ss">&quot;Title&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;Title&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;State&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;field_1&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;LIc Occupany (PC/SL/AL)&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;field_2&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;float&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="ss">&quot;Lic Occupancy (MC)&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;field_3&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;float&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="ss">&quot;Status&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;field_4&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;Licensure number&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;field_5&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;int&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="ss">&quot;Facility Address 1&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;field_7&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;Facility City/State&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;field_8&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;Facility Zipcode&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;field_9&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;float&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="ss">&quot;Facility Tax ID&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;field_10&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;Taxpayer ID&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;field_11&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;LegalName&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;LegalName&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;ExpireDate&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">parse_datetime</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;ExpireDate&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;DaysTillExpire&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;DaysTillExpire&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;float&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="ss">&quot;RenewalStage&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;RenewalStage&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;LicenseInspectionSummary&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;LicenseInspectionSummary&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;Certificate&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;Certificate&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;CommunityDocs&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;CommunityDocs&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;ContentType&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;ContentType&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;Modified&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">parse_datetime</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;Modified&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;Created&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">parse_datetime</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;Created&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;AuthorLookupId&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;AuthorLookupId&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;int&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="ss">&quot;EditorLookupId&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;EditorLookupId&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;int&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="ss">&quot;_UIVersionString&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;_UIVersionString&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;float&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="ss">&quot;Attachments&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;Attachments&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;int&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="ss">&quot;Edit&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;Edit&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;LinkTitleNoMenu&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;LinkTitleNoMenu&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;ItemChildCount&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;ItemChildCount&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;int&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="ss">&quot;FolderChildCount&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;FolderChildCount&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;int&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="ss">&quot;_ComplianceFlags&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;_ComplianceFlags&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;_ComplianceTag&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;_ComplianceTag&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;_ComplianceTagWrittenTime&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">parse_datetime</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;_ComplianceTagWrittenTime&quot;</span><span class="p">)),</span>
+<span class="w">        </span><span class="ss">&quot;_ComplianceTagUserId&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;_ComplianceTagUserId&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;int&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="ss">&quot;AppAuthorLookupId&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;AppAuthorLookupId&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;int&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="ss">&quot;AppEditorLookupId&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">safe_value</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;AppEditorLookupId&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;int&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="err">}</span>
+
+<span class="w">    </span><span class="n">existing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">existing_rows</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="k">row</span><span class="o">[</span><span class="n">&quot;id&quot;</span><span class="o">]</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nl">existing</span><span class="p">:</span>
+<span class="w">        </span><span class="n">changed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">False</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">row</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;id&quot;</span><span class="err">:</span>
+<span class="w">                </span><span class="k">continue</span>
+<span class="w">            </span><span class="n">existing_val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">existing</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="nc">datetime</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">existing_val</span><span class="p">,</span><span class="w"> </span><span class="nc">datetime</span><span class="p">)</span><span class="err">:</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nl">existing_val</span><span class="p">:</span>
+<span class="w">                    </span><span class="n">changed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">True</span>
+<span class="w">                    </span><span class="k">break</span>
+<span class="w">            </span><span class="n">elif</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nl">existing_val</span><span class="p">:</span>
+<span class="w">                </span><span class="n">changed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">True</span>
+<span class="w">                </span><span class="k">break</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nl">changed</span><span class="p">:</span>
+<span class="w">            </span><span class="n">set_clause</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;, &quot;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="o">[</span><span class="n">f&quot;[{col}</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">%</span><span class="n">s</span><span class="ss">&quot; for col in row if col != &quot;</span><span class="n">id</span><span class="ss">&quot;])</span>
+<span class="ss">            values = [row[col] for col in row if col != &quot;</span><span class="n">id</span><span class="ss">&quot;]</span>
+<span class="ss">            values.append(row[&quot;</span><span class="n">id</span><span class="ss">&quot;])</span>
+<span class="ss">            update_sql = f&quot;</span><span class="k">UPDATE</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">DimCommLicense</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="err">{</span><span class="n">set_clause</span><span class="err">}</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">%</span><span class="n">s</span><span class="ss">&quot;</span>
+<span class="ss">            cursor.execute(update_sql, values)</span>
+<span class="ss">            updates += 1</span>
+<span class="ss">    else:</span>
+<span class="ss">        cols = &quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;.join([f&quot;</span><span class="o">[</span><span class="n">{col}</span><span class="o">]</span><span class="ss">&quot; for col in row])</span>
+<span class="ss">        placeholders = &quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;.join([&quot;</span><span class="o">%</span><span class="n">s</span><span class="ss">&quot;] * len(row))</span>
+<span class="ss">        insert_sql = f&quot;</span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">DimCommLicense</span><span class="w"> </span><span class="p">(</span><span class="err">{</span><span class="n">cols</span><span class="err">}</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="err">{</span><span class="n">placeholders</span><span class="err">}</span><span class="p">)</span><span class="ss">&quot;</span>
+<span class="ss">        cursor.execute(insert_sql, list(row.values()))</span>
+<span class="ss">        inserts += 1</span>
+
+<span class="ss">conn.commit()</span>
+<span class="ss">cursor.close()</span>
+<span class="ss">conn.close()</span>
+<span class="ss">logging.info(f&quot;</span><span class="n">Inserted</span><span class="w"> </span><span class="err">{</span><span class="n">inserts</span><span class="err">}</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="k">rows</span><span class="p">,</span><span class="w"> </span><span class="n">updated</span><span class="w"> </span><span class="err">{</span><span class="n">updates</span><span class="err">}</span><span class="w"> </span><span class="k">rows</span><span class="p">.</span><span class="err">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h1 id="-_14">------------------------------</h1>
+<h1 id="azure-function-entry-point">Azure Function entry point</h1>
+<h1 id="-_15">------------------------------</h1>
+<p>def main(mytimer: func.TimerRequest) -&gt; None:
+    logging.info("CommLicenseFunction started")
+    try:
+        token = get_access_token()
+        items = get_list_items(token)
+        upsert_items(items)
+        logging.info("CommLicenseFunction completed successfully")
+    except Exception as e:
+        logging.error        logging.error(f"Function failed: {e}", exc_info=True)</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
